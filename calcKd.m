@@ -6,9 +6,9 @@
 %
 %
 %
-%
-%
-%
+%The inputs are P(x,y) desired location of the end-point effector, tension matrix
+%consisiting of tension developed in the cables attached in the limb configuration,
+%and ratio in which cables divide the links. (In this case, p=2/3)
 %
 function [Kappa_D]=calcKappa_D(x,y,T,p)
 l1=0.52; l2=0.48;
