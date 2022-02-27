@@ -1,6 +1,6 @@
 tic
 clc, format compact
-%Author: Hitesh Pradhan
+%Owner: Hitesh Pradhan
 %Insititute: IIT Gandhinagar
 %Course: ES656-Human Robot Interaction
 %
