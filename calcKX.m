@@ -1,4 +1,4 @@
-%Title: Calculating joint configuration through inverse kinematics
+%Title: Calculating end-point stiffness matrix
 %Author: Hitesh Pradhan
 %Institute: Indian Institute of Technology, Gandhinagar, India
 %Course: ES 656 Human Robot Interaction, Spring Semester 2022
