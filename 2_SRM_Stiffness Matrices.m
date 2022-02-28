@@ -1,6 +1,6 @@
 tic
 clc, format compact
-%Owner: Hitesh Pradhan
+%Author: Hitesh Pradhan
 %Insititute: IIT Gandhinagar
 %Course: ES656-Human Robot Interaction
 %
@@ -163,7 +163,7 @@ origin=[0,0];
 
 %Provide the coordinates for the end-effector position at initial config
 %That will almost result in straight-like configuration
-ax=0.55; ay=-0.71; %<--------------------------------------------USER INPUT
+ax=-0.47; ay=-0.71; %<--------------------------------------------USER INPUT
 
 %Throught inverse kinematics, calculate the joint configuration.
 [q11_a,~,q21_a,~]=calcIKangles(ax,ay,l1,l2);
@@ -254,9 +254,9 @@ F=[1;1];
 %Tension will be equal to stifness coeff times change in cable length.
 %For each configuration, there will be unique T matrix.
 %T_a here means, Tension matrix for config-a
-T1_a=K_C(1,1)*(cable1_a-cable1_i) %Tension in the cable1 of config-a
-T2_a=K_C(2,2)*(cable2_a-cable2_i) %Tension in the cable2 of config-a
-T3_a=K_C(3,3)*(cable3_a-cable3_i) %Tension in the cable3 of config-a
+T1_a=K_C(1,1)*(cable1_a-cable1_i); %Tension in the cable1 of config-a
+T2_a=K_C(2,2)*(cable2_a-cable2_i); %Tension in the cable2 of config-a
+T3_a=K_C(3,3)*(cable3_a-cable3_i); %Tension in the cable3 of config-a
 T_a = [T1_a;T2_a;T3_a];            %Tension matrix for config-a
 T_a = max(T_a,0);
     
@@ -276,15 +276,34 @@ syms x y
 Eqn = [x y]*(K_X_a)'*(K_X_a)*[x y]'-1;
 Eqn_1 = [x y]*(K_Q_a*30)'*(K_Q_a*30)*[x y]'-1;
 hold on
-fimplicit(Eqn,'--r','LineWidth',1)
 fimplicit(Eqn_1,'r','LineWidth',1)
+fimplicit(Eqn,'--r','LineWidth',1)
 xlabel('X-axis');ylabel('Y-axis');
 title('Task Space-Joint Space stiffness Ellipse for Config-A');
-axis square
+axis equal
 disp('STATUS: COMPLETED')
+disp('FIGURE1: Limb Reachable Workspace')
+disp('FIGURE2: Composite Diagram')
+disp('FIGURE3: Joint Space Ellipsoid and Task Space Ellipsoid')
+figure(3);
+subplot(1,2,1);
+fimplicit(Eqn_1,'r','LineWidth',1)
+axis ([-15 15 -15 15])
+grid on
+xlabel('X-axis');ylabel('Y-axis');
+title('Joint Space Stiffness Ellipsoid');
+
+
+figure(3);
+subplot(1,2,2);
+fimplicit(Eqn,'--r','LineWidth',1)
+axis ([-5 5 -5 5])
+grid on
+xlabel('X-axis');ylabel('Y-axis');
+title('Task Space Stiffness Ellipsoid');
 toc
 
-
+---------------------------------------------------------------------------------------------------
 
 
 function [Kappa_D]=calcKappa_D(x,y,T,p)
